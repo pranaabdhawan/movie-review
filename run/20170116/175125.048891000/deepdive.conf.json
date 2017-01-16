@@ -1,0 +1,48 @@
+{
+    "deepdive" : {
+        "calibration" : {
+            "holdout_fraction" : 0.25
+        },
+        "db" : {
+            "default" : {
+                "dbname" : "deepdive_movie_pranaab",
+                "driver" : "org.postgresql.Driver",
+                "host" : "localhost",
+                "incremental_mode" : "ORIGINAL",
+                "password" : "",
+                "port" : "5432",
+                "url" : "jdbc:postgresql://localhost:5432/deepdive_movie_pranaab",
+                "user" : "pranaab"
+            }
+        },
+        "pipeline" : {
+            "run" : ""
+        },
+        "sampler" : {
+            "sampler_args" : "-l 1000 -s 1 -i 1000 --alpha 0.01 --sample_evidence",
+            "sampler_cmd" : "sampler-dw"
+        },
+        "schema" : {
+            "relations" : {
+                "reviews" : {
+                    "columns" : {
+                        "id" : {
+                            "index" : 0,
+                            "type" : "int"
+                        },
+                        "sentence" : {
+                            "index" : 1,
+                            "type" : "text"
+                        },
+                        "sentiment" : {
+                            "index" : 2,
+                            "type" : "int"
+                        }
+                    }
+                }
+            },
+            "variables" : {}
+        }
+    }
+}
+

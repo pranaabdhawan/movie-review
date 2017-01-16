@@ -1,0 +1,5 @@
+reviews(
+  id int,
+  sentence text,
+  sentiment int
+).
