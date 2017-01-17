@@ -1,0 +1,436 @@
+{
+  "deepdive": {
+    "calibration": {
+      "holdout_fraction": 0.25
+    },
+    "db": {
+      "default": {
+        "dbname": "deepdive_movie_pranaab",
+        "driver": "org.postgresql.Driver",
+        "host": "localhost",
+        "incremental_mode": "ORIGINAL",
+        "password": "",
+        "port": "5432",
+        "url": "jdbc:postgresql://localhost:5432/deepdive_movie_pranaab",
+        "user": "pranaab"
+      }
+    },
+    "extraction": {
+      "extractors": {
+        "ext_is_negative": {
+          "cmd": "\n\n\t# TODO use temporary table\n\tdeepdive create table \"is_negative\"\n\tdeepdive sql 'INSERT INTO is_negative SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 0 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t# TODO rename temporary table to replace output_relation\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_negative",
+          "style": "cmd_extractor"
+        },
+        "ext_is_neutral": {
+          "cmd": "\n\n\tdeepdive create view is_neutral as 'SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 2 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_neutral",
+          "style": "cmd_extractor"
+        },
+        "ext_is_positive": {
+          "cmd": "\n\n\tdeepdive create view is_positive as 'SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 4 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_positive",
+          "style": "cmd_extractor"
+        },
+        "ext_is_somewhat_negative": {
+          "cmd": "\n\n\tdeepdive create view is_somewhat_negative as 'SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 1 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_somewhat_negative",
+          "style": "cmd_extractor"
+        },
+        "ext_is_somewhat_positive": {
+          "cmd": "\n\n\tdeepdive create view is_somewhat_positive as 'SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 3 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_somewhat_positive",
+          "style": "cmd_extractor"
+        },
+        "ext_review_feature_by_extract_features": {
+          "input": " SELECT R0.review_id AS \"reviews.R0.review_id\", R0.sentence AS \"reviews.R0.sentence\"\nFROM reviews R0\n        \n          ",
+          "input_batch_size": "100000",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "review_feature",
+          "parallelism": "1",
+          "style": "tsv_extractor",
+          "udf": "\"$DEEPDIVE_APP\"/udf/extract_features.py"
+        }
+      }
+    },
+    "inference": {
+      "factors": {
+        "inf_istrue_is_negative": {
+          "dependencies": [
+            "ext_review_feature_by_extract_features"
+          ],
+          "function": "Imply(is_negative.R0.label)",
+          "input_query": "\n          SELECT R0.id AS \"is_negative.R0.id\" , R2.feature AS \"dd_weight_column_0\" \n          FROM is_negative R0, reviews R1, review_feature R2\n        WHERE R1.review_id = R0.index  AND R2.id = R0.index ",
+          "input_relations": [
+            "is_negative",
+            "reviews",
+            "review_feature"
+          ],
+          "weight": "?(dd_weight_column_0)"
+        }
+      }
+    },
+    "pipeline": {
+      "pipelines": {
+        "endtoend": [
+          "ext_is_somewhat_negative",
+          "ext_is_negative",
+          "ext_review_feature_by_extract_features",
+          "ext_is_somewhat_positive",
+          "ext_is_neutral",
+          "ext_is_positive",
+          "inf_istrue_is_negative"
+        ],
+        "extraction": [
+          "ext_is_somewhat_negative",
+          "ext_is_negative",
+          "ext_review_feature_by_extract_features",
+          "ext_is_somewhat_positive",
+          "ext_is_neutral",
+          "ext_is_positive"
+        ],
+        "inference": [
+          "inf_istrue_is_negative"
+        ]
+      },
+      "run": ""
+    },
+    "sampler": {
+      "sampler_args": "-l 1000 -s 1 -i 1000 --alpha 0.01 --sample_evidence",
+      "sampler_cmd": "sampler-dw"
+    },
+    "schema": {
+      "relations": {
+        "is_negative": {
+          "columns": {
+            "index": {
+              "index": 0,
+              "type": "int"
+            }
+          },
+          "variable_cardinality": 2,
+          "variable_type": "boolean"
+        },
+        "is_neutral": {
+          "columns": {
+            "column_0": {
+              "index": 0,
+              "type": "UNKNOWN"
+            }
+          },
+          "type": "view"
+        },
+        "is_positive": {
+          "columns": {
+            "column_0": {
+              "index": 0,
+              "type": "UNKNOWN"
+            }
+          },
+          "type": "view"
+        },
+        "is_somewhat_negative": {
+          "columns": {
+            "column_0": {
+              "index": 0,
+              "type": "UNKNOWN"
+            }
+          },
+          "type": "view"
+        },
+        "is_somewhat_positive": {
+          "columns": {
+            "column_0": {
+              "index": 0,
+              "type": "UNKNOWN"
+            }
+          },
+          "type": "view"
+        },
+        "review_feature": {
+          "columns": {
+            "feature": {
+              "index": 1,
+              "type": "text"
+            },
+            "id": {
+              "index": 0,
+              "type": "int"
+            }
+          }
+        },
+        "reviews": {
+          "columns": {
+            "review_id": {
+              "index": 0,
+              "type": "int"
+            },
+            "sentence": {
+              "index": 1,
+              "type": "text"
+            },
+            "sentiment": {
+              "index": 2,
+              "type": "int"
+            }
+          }
+        }
+      },
+      "variables": {
+        "is_negative": {
+          "label": "Boolean"
+        }
+      }
+    }
+  },
+  "deepdive_": {
+    "calibration": {
+      "holdout_fraction": 0.25
+    },
+    "db": {
+      "default": {
+        "dbname": "deepdive_movie_pranaab",
+        "driver": "org.postgresql.Driver",
+        "host": "localhost",
+        "incremental_mode": "ORIGINAL",
+        "password": "",
+        "port": "5432",
+        "url": "jdbc:postgresql://localhost:5432/deepdive_movie_pranaab",
+        "user": "pranaab"
+      }
+    },
+    "extraction": {
+      "extractors": {
+        "ext_is_negative": {
+          "cmd": "\n\n\t# TODO use temporary table\n\tdeepdive create table \"is_negative\"\n\tdeepdive sql 'INSERT INTO is_negative SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 0 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t# TODO rename temporary table to replace output_relation\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_negative",
+          "style": "cmd_extractor"
+        },
+        "ext_is_neutral": {
+          "cmd": "\n\n\tdeepdive create view is_neutral as 'SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 2 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_neutral",
+          "style": "cmd_extractor"
+        },
+        "ext_is_positive": {
+          "cmd": "\n\n\tdeepdive create view is_positive as 'SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 4 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_positive",
+          "style": "cmd_extractor"
+        },
+        "ext_is_somewhat_negative": {
+          "cmd": "\n\n\tdeepdive create view is_somewhat_negative as 'SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 1 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_somewhat_negative",
+          "style": "cmd_extractor"
+        },
+        "ext_is_somewhat_positive": {
+          "cmd": "\n\n\tdeepdive create view is_somewhat_positive as 'SELECT DISTINCT R0.review_id, 0 AS id, \nCASE WHEN R0.sentiment = 3 THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0\n        \n          '\n\t\n        ",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "is_somewhat_positive",
+          "style": "cmd_extractor"
+        },
+        "ext_review_feature_by_extract_features": {
+          "input": " SELECT R0.review_id AS \"reviews.R0.review_id\", R0.sentence AS \"reviews.R0.sentence\"\nFROM reviews R0\n        \n          ",
+          "input_batch_size": "100000",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "review_feature",
+          "parallelism": "1",
+          "style": "tsv_extractor",
+          "udf": "\"$DEEPDIVE_APP\"/udf/extract_features.py"
+        }
+      }
+    },
+    "inference": {
+      "factors": {
+        "inf_istrue_is_negative": {
+          "dependencies": [
+            "ext_review_feature_by_extract_features"
+          ],
+          "function": "Imply(is_negative.R0.label)",
+          "input_query": "\n          SELECT R0.id AS \"is_negative.R0.id\" , R2.feature AS \"dd_weight_column_0\" \n          FROM is_negative R0, reviews R1, review_feature R2\n        WHERE R1.review_id = R0.index  AND R2.id = R0.index ",
+          "input_relations": [
+            "is_negative",
+            "reviews",
+            "review_feature"
+          ],
+          "weight": "?(dd_weight_column_0)"
+        }
+      }
+    },
+    "pipeline": {
+      "pipelines": {
+        "endtoend": [
+          "ext_is_somewhat_negative",
+          "ext_is_negative",
+          "ext_review_feature_by_extract_features",
+          "ext_is_somewhat_positive",
+          "ext_is_neutral",
+          "ext_is_positive",
+          "inf_istrue_is_negative"
+        ],
+        "extraction": [
+          "ext_is_somewhat_negative",
+          "ext_is_negative",
+          "ext_review_feature_by_extract_features",
+          "ext_is_somewhat_positive",
+          "ext_is_neutral",
+          "ext_is_positive"
+        ],
+        "inference": [
+          "inf_istrue_is_negative"
+        ]
+      },
+      "run": ""
+    },
+    "sampler": {
+      "sampler_args": "-l 1000 -s 1 -i 1000 --alpha 0.01 --sample_evidence",
+      "sampler_cmd": "sampler-dw"
+    },
+    "schema": {
+      "relations": {
+        "is_negative": {
+          "columns": {
+            "index": {
+              "index": 0,
+              "type": "int"
+            }
+          },
+          "variable_cardinality": 2,
+          "variable_type": "boolean"
+        },
+        "is_neutral": {
+          "columns": {
+            "column_0": {
+              "index": 0,
+              "type": "UNKNOWN"
+            }
+          },
+          "type": "view"
+        },
+        "is_positive": {
+          "columns": {
+            "column_0": {
+              "index": 0,
+              "type": "UNKNOWN"
+            }
+          },
+          "type": "view"
+        },
+        "is_somewhat_negative": {
+          "columns": {
+            "column_0": {
+              "index": 0,
+              "type": "UNKNOWN"
+            }
+          },
+          "type": "view"
+        },
+        "is_somewhat_positive": {
+          "columns": {
+            "column_0": {
+              "index": 0,
+              "type": "UNKNOWN"
+            }
+          },
+          "type": "view"
+        },
+        "review_feature": {
+          "columns": {
+            "feature": {
+              "index": 1,
+              "type": "text"
+            },
+            "id": {
+              "index": 0,
+              "type": "int"
+            }
+          }
+        },
+        "reviews": {
+          "columns": {
+            "review_id": {
+              "index": 0,
+              "type": "int"
+            },
+            "sentence": {
+              "index": 1,
+              "type": "text"
+            },
+            "sentiment": {
+              "index": 2,
+              "type": "int"
+            }
+          }
+        }
+      },
+      "variables": {
+        "is_negative": {
+          "label": "Boolean"
+        }
+      },
+      "variables_": [
+        {
+          "variableName": "is_negative",
+          "variablesTable": "is_negative",
+          "variablesLabelColumn": "label",
+          "variableCategoriesTable": "dd_categories_is_negative",
+          "isBooleanType": true,
+          "isCategoricalType": false,
+          "variableCardinality": 2,
+          "variableType": "boolean"
+        }
+      ],
+      "variables_byName": {
+        "is_negative": {
+          "variableName": "is_negative",
+          "variablesTable": "is_negative",
+          "variablesLabelColumn": "label",
+          "variableCategoriesTable": "dd_categories_is_negative",
+          "isBooleanType": true,
+          "isCategoricalType": false,
+          "variableCardinality": 2,
+          "variableType": "boolean"
+        }
+      }
+    },
+    "execution": {
+      "processes": {
+        "process/init/app": {
+          "style": "cmd_extractor",
+          "cmd": "\n        deepdive db init\n\n        cd \"$DEEPDIVE_APP\"\n        # run legacy schema.sql\n        if [[ -r schema.sql ]]; then\n            deepdive db prompt <schema.sql\n        fi\n        # run legacy init script\n        if [[ -x input/init.sh ]]; then\n            input/init.sh\n        fi\n        "
+        }
+      }
+    }
+  }
+}

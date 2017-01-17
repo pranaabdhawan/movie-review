@@ -1,0 +1,13 @@
+2017-01-16 21:35:49.519576 ‘run/LATEST.COMPILE’ -> ‘20170116/213549.449541000’
+2017-01-16 21:35:49.519917 ‘run/RUNNING.COMPILE’ -> ‘20170116/213549.449541000’
+2017-01-16 21:35:49.519966 Parsing DeepDive application (/Users/pranaab/Developer/Term3A/URA/movie-review) to generate:
+2017-01-16 21:35:49.520010  run/compiled/schema.json
+2017-01-16 21:35:49.520053   from app.ddlog
+2017-01-16 21:35:50.261070  run/compiled/deepdive.conf
+2017-01-16 21:35:50.261267   from app.ddlog
+2017-01-16 21:35:51.004131 [error] relation "is_postive" is not defined
+2017-01-16 21:35:51.004193 @weight(f)
+2017-01-16 21:35:51.004214 is_postive(index) :-
+2017-01-16 21:35:51.004233     reviews(index, _, _),
+2017-01-16 21:35:51.004251     review_feature(index, f).
+2017-01-16 21:35:51.004271 

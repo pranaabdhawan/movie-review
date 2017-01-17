@@ -1,0 +1,10 @@
+2017-01-16 21:35:12.816333 ‘run/LATEST.COMPILE’ -> ‘20170116/213512.740526000’
+2017-01-16 21:35:12.816624 ‘run/RUNNING.COMPILE’ -> ‘20170116/213512.740526000’
+2017-01-16 21:35:12.816655 Parsing DeepDive application (/Users/pranaab/Developer/Term3A/URA/movie-review) to generate:
+2017-01-16 21:35:12.816679  run/compiled/schema.json
+2017-01-16 21:35:12.816702   from app.ddlog
+2017-01-16 21:35:13.452509 [error] app.ddlog[67.3] failure: `.' expected but `r' found
+2017-01-16 21:35:13.452579 
+2017-01-16 21:35:13.452601   review_feature(index,f)
+2017-01-16 21:35:13.452621 
+2017-01-16 21:35:13.452641   ^

@@ -1,5 +1,82 @@
 reviews(
-  id int,
+  review_id int,
   sentence text,
   sentiment int
 ).
+
+review_feature(
+  id int,
+  feature text
+).
+
+function extract_features over (
+  index int,
+  sentence text
+) returns rows like review_feature
+implementation "udf/extract_features.py" handles tsv lines.
+
+review_feature += extract_features(
+  index, sentence
+) :-
+  reviews(index, sentence, _).
+
+is_negative(index) = if sentiment = 0 then TRUE
+                  else FALSE end:- reviews(index,_,sentiment).
+
+is_somewhat_negative(index) = if sentiment = 1 then TRUE
+                          else FALSE end:- reviews(index,_,sentiment).
+
+is_neutral(index) = if sentiment = 2 then TRUE
+                  else FALSE end:- reviews(index,_,sentiment).
+
+is_somewhat_positive(index) = if sentiment = 3 then TRUE
+                          else FALSE end:- reviews(index,_,sentiment).
+
+is_positive(index) = if sentiment = 4 then TRUE
+                  else FALSE end:- reviews(index,_,sentiment).
+
+is_negative?(
+  index int
+).
+
+
+@weight(f)
+is_negative(index) :-
+  reviews(index,_,_),
+  review_feature(index,f).
+
+is_somewhat_negative?(
+  index int
+).
+
+is_neutral?(
+  index int
+).
+
+is_somewhat_positive?(
+  index int
+).
+
+is_positive?(
+  index int
+).
+
+@weight(f)
+is_somewhat_negative(index) :-
+  reviews(index,_,_),
+  review_feature(index,f).
+
+@weight(f)
+is_neutral(index) :-
+  reviews(index,_,_),
+  review_feature(index,f).
+
+@weight(f)
+is_somewhat_positive(index) :-
+  reviews(index,_,_),
+  review_feature(index,f).
+
+@weight(f)
+is_positive(index) :-
+  reviews(index,_,_),
+  review_feature(index,f).

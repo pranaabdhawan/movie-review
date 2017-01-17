@@ -1,4 +1,0 @@
-{
-  "path": "dataflow.dot",
-  "content": "\ndigraph \"movie-review data flow\" {\n    graph[rankdir=BT  # bottom-to-top drawing (or RL/right-to-left may also make sense)\n    ];\n    node [shape=box\n         ,style=dotted\n         ,fontsize=10\n         ,fontname=\"Ubuntu Mono,Envy Code R,Oxygen Mono,Consolas,Menlo,Monaco,Andale Mono\"\n    ];\n    edge [color=\"#999999\"];\n\n\n\"process/\ninit/app\" [shape=ellipse  color=\"#cc2222\" style=solid];\n\n\"process/\ninit/relation/reviews\" [shape=ellipse  color=\"#cc2222\" style=solid];\n\n\"process/\ninit/app\" -> \"process/\ninit/relation/reviews\" [\nlabel=\"\"\n\n];\n\n\"data/\nreviews\" [shape=box3d    color=\"#2222cc\" style=solid];\n\n\"process/\ninit/relation/reviews\" -> \"data/\nreviews\" [\nlabel=\"\"\n\n];\n\n\n}\n"
-}

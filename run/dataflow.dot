@@ -23,12 +23,886 @@ label=""
 
 ];
 
+"process/
+ext_is_negative" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+reviews" -> "process/
+ext_is_negative" [
+label=""
+
+];
+
+"process/
+ext_is_neutral" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+reviews" -> "process/
+ext_is_neutral" [
+label=""
+
+];
+
+"process/
+ext_is_positive" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+reviews" -> "process/
+ext_is_positive" [
+label=""
+
+];
+
+"process/
+ext_is_somewhat_negative" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+reviews" -> "process/
+ext_is_somewhat_negative" [
+label=""
+
+];
+
+"process/
+ext_is_somewhat_positive" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+reviews" -> "process/
+ext_is_somewhat_positive" [
+label=""
+
+];
+
+"process/
+ext_review_feature_by_extract_features" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+reviews" -> "process/
+ext_review_feature_by_extract_features" [
+label=""
+
+];
+
+"process/
+grounding/variable_id_partition" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+is_negative" -> "process/
+grounding/variable_id_partition" [
+label=""
+
+];
+
+"data/
+is_neutral" -> "process/
+grounding/variable_id_partition" [
+label=""
+
+];
+
+"data/
+is_positive" -> "process/
+grounding/variable_id_partition" [
+label=""
+
+];
+
+"data/
+is_somewhat_negative" -> "process/
+grounding/variable_id_partition" [
+label=""
+
+];
+
+"data/
+is_somewhat_positive" -> "process/
+grounding/variable_id_partition" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_negative/assign_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_id_partition" -> "process/
+grounding/variable/is_negative/assign_id" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_neutral/assign_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_id_partition" -> "process/
+grounding/variable/is_neutral/assign_id" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_positive/assign_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_id_partition" -> "process/
+grounding/variable/is_positive/assign_id" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_negative/assign_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_id_partition" -> "process/
+grounding/variable/is_somewhat_negative/assign_id" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_positive/assign_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_id_partition" -> "process/
+grounding/variable/is_somewhat_positive/assign_id" [
+label=""
+
+];
+
+"process/
+grounding/variable_holdout" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable/is_negative/assign_id" -> "process/
+grounding/variable_holdout" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_neutral/assign_id" -> "process/
+grounding/variable_holdout" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_positive/assign_id" -> "process/
+grounding/variable_holdout" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_negative/assign_id" -> "process/
+grounding/variable_holdout" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_positive/assign_id" -> "process/
+grounding/variable_holdout" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_negative/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_holdout" -> "process/
+grounding/variable/is_negative/dump" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_neutral/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_holdout" -> "process/
+grounding/variable/is_neutral/dump" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_positive/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_holdout" -> "process/
+grounding/variable/is_positive/dump" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_negative/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_holdout" -> "process/
+grounding/variable/is_somewhat_negative/dump" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_positive/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/variable_holdout" -> "process/
+grounding/variable/is_somewhat_positive/dump" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_negative/materialize" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+review_feature" -> "process/
+grounding/factor/inf_istrue_is_negative/materialize" [
+label=""
+
+];
+
+"data/
+reviews" -> "process/
+grounding/factor/inf_istrue_is_negative/materialize" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_negative/assign_id" -> "process/
+grounding/factor/inf_istrue_is_negative/materialize" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/materialize" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+review_feature" -> "process/
+grounding/factor/inf_istrue_is_neutral/materialize" [
+label=""
+
+];
+
+"data/
+reviews" -> "process/
+grounding/factor/inf_istrue_is_neutral/materialize" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_neutral/assign_id" -> "process/
+grounding/factor/inf_istrue_is_neutral/materialize" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_positive/materialize" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+review_feature" -> "process/
+grounding/factor/inf_istrue_is_positive/materialize" [
+label=""
+
+];
+
+"data/
+reviews" -> "process/
+grounding/factor/inf_istrue_is_positive/materialize" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_positive/assign_id" -> "process/
+grounding/factor/inf_istrue_is_positive/materialize" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/materialize" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+review_feature" -> "process/
+grounding/factor/inf_istrue_is_somewhat_negative/materialize" [
+label=""
+
+];
+
+"data/
+reviews" -> "process/
+grounding/factor/inf_istrue_is_somewhat_negative/materialize" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_negative/assign_id" -> "process/
+grounding/factor/inf_istrue_is_somewhat_negative/materialize" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/materialize" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+review_feature" -> "process/
+grounding/factor/inf_istrue_is_somewhat_positive/materialize" [
+label=""
+
+];
+
+"data/
+reviews" -> "process/
+grounding/factor/inf_istrue_is_somewhat_positive/materialize" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_positive/assign_id" -> "process/
+grounding/factor/inf_istrue_is_somewhat_positive/materialize" [
+label=""
+
+];
+
+"process/
+grounding/weight_id_partition" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_negative/materialize" -> "process/
+grounding/weight_id_partition" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/materialize" -> "process/
+grounding/weight_id_partition" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_positive/materialize" -> "process/
+grounding/weight_id_partition" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/materialize" -> "process/
+grounding/weight_id_partition" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/materialize" -> "process/
+grounding/weight_id_partition" [
+label=""
+
+];
+
+"process/
+grounding/global_weight_table" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_negative/materialize" -> "process/
+grounding/global_weight_table" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/materialize" -> "process/
+grounding/global_weight_table" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_positive/materialize" -> "process/
+grounding/global_weight_table" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/materialize" -> "process/
+grounding/global_weight_table" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/materialize" -> "process/
+grounding/global_weight_table" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_negative/assign_weight_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/weight_id_partition" -> "process/
+grounding/factor/inf_istrue_is_negative/assign_weight_id" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/assign_weight_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/weight_id_partition" -> "process/
+grounding/factor/inf_istrue_is_neutral/assign_weight_id" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_positive/assign_weight_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/weight_id_partition" -> "process/
+grounding/factor/inf_istrue_is_positive/assign_weight_id" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/assign_weight_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/weight_id_partition" -> "process/
+grounding/factor/inf_istrue_is_somewhat_negative/assign_weight_id" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/assign_weight_id" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/weight_id_partition" -> "process/
+grounding/factor/inf_istrue_is_somewhat_positive/assign_weight_id" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_negative/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_negative/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_negative/dump" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_neutral/dump" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_positive/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_positive/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_positive/dump" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_somewhat_negative/dump" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/dump" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_somewhat_positive/dump" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_negative/dump_weights" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_negative/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_negative/dump_weights" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/dump_weights" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_neutral/dump_weights" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_positive/dump_weights" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_positive/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_positive/dump_weights" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/dump_weights" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_somewhat_negative/dump_weights" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/dump_weights" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/assign_weight_id" -> "process/
+grounding/factor/inf_istrue_is_somewhat_positive/dump_weights" [
+label=""
+
+];
+
+"process/
+grounding/combine_factorgraph" [shape=ellipse  color="#cc2222" style=solid];
+
+"process/
+grounding/factor/inf_istrue_is_negative/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_negative/dump_weights" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_neutral/dump_weights" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_positive/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_positive/dump_weights" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_negative/dump_weights" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/factor/inf_istrue_is_somewhat_positive/dump_weights" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/global_weight_table" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_negative/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_neutral/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_positive/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_negative/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+grounding/variable/is_somewhat_positive/dump" -> "process/
+grounding/combine_factorgraph" [
+label=""
+
+];
+
+"process/
+model/learning" [shape=ellipse  color="#cc2222" style=solid];
+
+"model/
+factorgraph" -> "process/
+model/learning" [
+label=""
+
+];
+
+"process/
+model/inference" [shape=ellipse  color="#cc2222" style=solid];
+
+"model/
+factorgraph" -> "process/
+model/inference" [
+label=""
+
+];
+
+"model/
+weights" -> "process/
+model/inference" [
+label=""
+
+];
+
+"process/
+model/load_weights" [shape=ellipse  color="#cc2222" style=solid];
+
+"model/
+weights" -> "process/
+model/load_weights" [
+label=""
+
+];
+
+"process/
+model/load_probabilities" [shape=ellipse  color="#cc2222" style=solid];
+
+"model/
+probabilities" -> "process/
+model/load_probabilities" [
+label=""
+
+];
+
+"process/
+model/calibration" [shape=ellipse  color="#cc2222" style=solid];
+
+"data/
+model/probabilities" -> "process/
+model/calibration" [
+label=""
+
+];
+
+"data/
+is_negative" [shape=box3d    color="#2222cc" style=solid];
+
+"process/
+ext_is_negative" -> "data/
+is_negative" [
+label=""
+
+];
+
+"data/
+is_neutral" [shape=box3d    color="#2222cc" style=solid];
+
+"process/
+ext_is_neutral" -> "data/
+is_neutral" [
+label=""
+
+];
+
+"data/
+is_positive" [shape=box3d    color="#2222cc" style=solid];
+
+"process/
+ext_is_positive" -> "data/
+is_positive" [
+label=""
+
+];
+
+"data/
+is_somewhat_negative" [shape=box3d    color="#2222cc" style=solid];
+
+"process/
+ext_is_somewhat_negative" -> "data/
+is_somewhat_negative" [
+label=""
+
+];
+
+"data/
+is_somewhat_positive" [shape=box3d    color="#2222cc" style=solid];
+
+"process/
+ext_is_somewhat_positive" -> "data/
+is_somewhat_positive" [
+label=""
+
+];
+
+"data/
+model/probabilities" [shape=box3d    color="#2222cc" style=solid];
+
+"process/
+model/load_probabilities" -> "data/
+model/probabilities" [
+label=""
+
+];
+
+"data/
+model/weights" [shape=box3d    color="#2222cc" style=solid];
+
+"process/
+model/load_weights" -> "data/
+model/weights" [
+label=""
+
+];
+
+"data/
+review_feature" [shape=box3d    color="#2222cc" style=solid];
+
+"process/
+ext_review_feature_by_extract_features" -> "data/
+review_feature" [
+label=""
+
+];
+
 "data/
 reviews" [shape=box3d    color="#2222cc" style=solid];
 
 "process/
 init/relation/reviews" -> "data/
 reviews" [
+label=""
+
+];
+
+"model/
+calibration-plots" [shape=septagon color="#ffffff" style=filled fillcolor="#cc22cc"];
+
+"process/
+model/calibration" -> "model/
+calibration-plots" [
+label=""
+
+];
+
+"model/
+factorgraph" [shape=septagon color="#ffffff" style=filled fillcolor="#cc22cc"];
+
+"process/
+grounding/combine_factorgraph" -> "model/
+factorgraph" [
+label=""
+
+];
+
+"model/
+probabilities" [shape=septagon color="#ffffff" style=filled fillcolor="#cc22cc"];
+
+"process/
+model/inference" -> "model/
+probabilities" [
+label=""
+
+];
+
+"model/
+weights" [shape=septagon color="#ffffff" style=filled fillcolor="#cc22cc"];
+
+"process/
+model/learning" -> "model/
+weights" [
 label=""
 
 ];

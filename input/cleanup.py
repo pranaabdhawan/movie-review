@@ -1,8 +1,8 @@
 import csv
 
-with open('train.tsv','rb') as tsvin, open('reviews.csv','wb') as csvout:
+with open('train.tsv','rb') as tsvin, open('reviews.tsv','wb') as csvout:
     tsvin = csv.reader(tsvin, delimiter = '\t')
-    csvout = csv.writer(csvout)
+    csvout = csv.writer(csvout, delimiter = '\t')
 
     index = 1;
     for idx, row in enumerate(tsvin):

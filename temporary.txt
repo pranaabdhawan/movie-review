@@ -1,0 +1,35 @@
+is_somewhat_negative?(
+  index int
+).
+
+is_neutral?(
+  index int
+).
+
+is_somewhat_positive?(
+  index int
+).
+
+is_positive?(
+  index int
+).
+
+@weight(f)
+is_somewhat_negative(index) :-
+  reviews(index,_,_)
+  review_feature(index,f)
+
+@weight(f)
+is_neutral(index) :-
+  reviews(index,_,_)
+  review_feature(index,f)
+
+@weight(f)
+is_somewhat_positive(index) :-
+  reviews(index,_,_)
+  review_feature(index,f)
+
+@weight(f)
+is_postive(index) :-
+  reviews(index,_,_)
+  review_feature(index,f)
