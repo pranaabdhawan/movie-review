@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # cmd_extractor  process/grounding/variable_id_partition
-# {"dependencies_":["data/is_negative","data/is_neutral","data/is_positive","data/is_somewhat_negative","data/is_somewhat_positive"],"style":"cmd_extractor","cmd":"\n        : ${DEEPDIVE_GROUNDING_DIR:=\"$DEEPDIVE_APP\"/run/model/grounding}\n\n        RANGE_BEGIN=0 \\\n        partition_id_range 'is_negative' 'is_neutral' 'is_positive' 'is_somewhat_negative' 'is_somewhat_positive' | {\n            # record the base\n            variableCountTotal=0\n            while read table begin excludeEnd; do\n                varPath=\"$DEEPDIVE_GROUNDING_DIR\"/variable/${table}\n                mkdir -p \"$varPath\"\n                cd \"$varPath\"\n                echo $begin                      >id_begin\n                echo $excludeEnd                 >id_exclude_end\n                echo $(( $excludeEnd - $begin )) >count\n                variableCountTotal=$excludeEnd\n            done\n            # record the final count\n            echo $variableCountTotal >\"$DEEPDIVE_GROUNDING_DIR\"/variable_count\n        }\n        ","name":"process/grounding/variable_id_partition"}
+# {"dependencies_":["data/review_sentiment"],"style":"cmd_extractor","cmd":"\n        : ${DEEPDIVE_GROUNDING_DIR:=\"$DEEPDIVE_APP\"/run/model/grounding}\n\n        RANGE_BEGIN=0 \\\n        partition_id_range 'review_sentiment' | {\n            # record the base\n            variableCountTotal=0\n            while read table begin excludeEnd; do\n                varPath=\"$DEEPDIVE_GROUNDING_DIR\"/variable/${table}\n                mkdir -p \"$varPath\"\n                cd \"$varPath\"\n                echo $begin                      >id_begin\n                echo $excludeEnd                 >id_exclude_end\n                echo $(( $excludeEnd - $begin )) >count\n                variableCountTotal=$excludeEnd\n            done\n            # record the final count\n            echo $variableCountTotal >\"$DEEPDIVE_GROUNDING_DIR\"/variable_count\n        }\n        ","name":"process/grounding/variable_id_partition"}
 set -xeuo pipefail
 cd "$(dirname "$0")"
 
@@ -11,7 +11,7 @@ export DEEPDIVE_CURRENT_PROCESS_NAME='process/grounding/variable_id_partition'
         : ${DEEPDIVE_GROUNDING_DIR:="$DEEPDIVE_APP"/run/model/grounding}
 
         RANGE_BEGIN=0 \
-        partition_id_range 'is_negative' 'is_neutral' 'is_positive' 'is_somewhat_negative' 'is_somewhat_positive' | {
+        partition_id_range 'review_sentiment' | {
             # record the base
             variableCountTotal=0
             while read table begin excludeEnd; do

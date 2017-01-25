@@ -1,0 +1,79 @@
+2017-01-25 01:27:56.328881 # on Pranaabs-MacBook-Pro.local: deepdive do review_sentiment
+2017-01-25 01:27:56.329127 # run/20170125/012754.245221000/plan.sh
+2017-01-25 01:27:56.329157 # execution plan for data/review_sentiment
+2017-01-25 01:27:56.329187 
+2017-01-25 01:27:56.329215 ## process/init/app ##########################################################
+2017-01-25 01:27:56.329252 # Done: N/A
+2017-01-25 01:27:56.329276 process/init/app/run.sh
+2017-01-25 01:27:56.329296 ++ dirname process/init/app/run.sh
+2017-01-25 01:27:56.329316 + cd process/init/app
+2017-01-25 01:27:56.329338 + export DEEPDIVE_CURRENT_PROCESS_NAME=process/init/app
+2017-01-25 01:27:56.329358 + DEEPDIVE_CURRENT_PROCESS_NAME=process/init/app
+2017-01-25 01:27:56.329380 + deepdive db init
+2017-01-25 01:27:56.980064 + cd /Users/pranaab/Developer/Term3A/URA/movie-review
+2017-01-25 01:27:56.980216 + [[ -r schema.sql ]]
+2017-01-25 01:27:56.980289 + [[ -x input/init.sh ]]
+2017-01-25 01:27:56.981119 mark_done process/init/app
+2017-01-25 01:27:57.007876 ##############################################################################
+2017-01-25 01:27:57.007932 
+2017-01-25 01:27:57.007958 ## process/init/relation/reviews #############################################
+2017-01-25 01:27:57.007984 # Done: N/A
+2017-01-25 01:27:57.008008 process/init/relation/reviews/run.sh
+2017-01-25 01:27:57.017250 ++ dirname process/init/relation/reviews/run.sh
+2017-01-25 01:27:57.021608 + cd process/init/relation/reviews
+2017-01-25 01:27:57.021758 + export DEEPDIVE_CURRENT_PROCESS_NAME=process/init/relation/reviews
+2017-01-25 01:27:57.021805 + DEEPDIVE_CURRENT_PROCESS_NAME=process/init/relation/reviews
+2017-01-25 01:27:57.021844 + deepdive create table reviews
+2017-01-25 01:27:57.179909 NOTICE:  table "reviews" does not exist, skipping
+2017-01-25 01:27:57.184166 CREATE TABLE
+2017-01-25 01:27:57.185864 + deepdive load reviews
+2017-01-25 01:27:57.288471 Loading reviews from input/reviews.tsv (tsv format)
+2017-01-25 01:27:57.339681 COPY 2626
+2017-01-25 01:27:57.349751 mark_done process/init/relation/reviews
+2017-01-25 01:27:57.370342 ##############################################################################
+2017-01-25 01:27:57.370399 
+2017-01-25 01:27:57.370424 ## data/reviews ##############################################################
+2017-01-25 01:27:57.370446 # Done: N/A
+2017-01-25 01:27:57.370467 # no-op
+2017-01-25 01:27:57.370487 mark_done data/reviews
+2017-01-25 01:27:57.390227 ##############################################################################
+2017-01-25 01:27:57.390302 
+2017-01-25 01:27:57.390332 ## process/init/relation/sentiments ##########################################
+2017-01-25 01:27:57.390354 # Done: N/A
+2017-01-25 01:27:57.390376 process/init/relation/sentiments/run.sh
+2017-01-25 01:27:57.397719 ++ dirname process/init/relation/sentiments/run.sh
+2017-01-25 01:27:57.402859 + cd process/init/relation/sentiments
+2017-01-25 01:27:57.403018 + export DEEPDIVE_CURRENT_PROCESS_NAME=process/init/relation/sentiments
+2017-01-25 01:27:57.403069 + DEEPDIVE_CURRENT_PROCESS_NAME=process/init/relation/sentiments
+2017-01-25 01:27:57.403249 + deepdive create table sentiments
+2017-01-25 01:27:57.545917 NOTICE:  table "sentiments" does not exist, skipping
+2017-01-25 01:27:57.551786 CREATE TABLE
+2017-01-25 01:27:57.553391 + deepdive load sentiments
+2017-01-25 01:27:57.664354 Loading sentiments from input/sentiments.tsv (tsv format)
+2017-01-25 01:27:57.712463 COPY 5
+2017-01-25 01:27:57.719321 mark_done process/init/relation/sentiments
+2017-01-25 01:27:57.737723 ##############################################################################
+2017-01-25 01:27:57.737812 
+2017-01-25 01:27:57.737844 ## data/sentiments ###########################################################
+2017-01-25 01:27:57.737867 # Done: N/A
+2017-01-25 01:27:57.737888 # no-op
+2017-01-25 01:27:57.737909 mark_done data/sentiments
+2017-01-25 01:27:57.761180 ##############################################################################
+2017-01-25 01:27:57.761250 
+2017-01-25 01:27:57.761272 ## process/ext_review_sentiment ##############################################
+2017-01-25 01:27:57.761293 # Done: N/A
+2017-01-25 01:27:57.761313 process/ext_review_sentiment/run.sh
+2017-01-25 01:27:57.768612 ++ dirname process/ext_review_sentiment/run.sh
+2017-01-25 01:27:57.772027 + cd process/ext_review_sentiment
+2017-01-25 01:27:57.772106 + export DEEPDIVE_CURRENT_PROCESS_NAME=process/ext_review_sentiment
+2017-01-25 01:27:57.772153 + DEEPDIVE_CURRENT_PROCESS_NAME=process/ext_review_sentiment
+2017-01-25 01:27:57.772180 + deepdive create table review_sentiment
+2017-01-25 01:27:57.924184 NOTICE:  table "review_sentiment" does not exist, skipping
+2017-01-25 01:27:57.928305 CREATE TABLE
+2017-01-25 01:27:57.929694 + deepdive sql 'INSERT INTO review_sentiment SELECT DISTINCT DISTINCT R0.review_id, R1.sentiment, 0 AS id, NULL AS label
+2017-01-25 01:27:57.929766           FROM reviews R0, sentiments R1
+2017-01-25 01:27:57.929793         
+2017-01-25 01:27:57.929815           '
+2017-01-25 01:27:58.017929 ERROR:  syntax error at or near "DISTINCT"
+2017-01-25 01:27:58.017998 LINE 1: INSERT INTO review_sentiment SELECT DISTINCT DISTINCT R0.rev...
+2017-01-25 01:27:58.018024                                                      ^

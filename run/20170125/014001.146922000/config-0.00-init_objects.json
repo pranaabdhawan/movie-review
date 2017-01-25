@@ -1,0 +1,250 @@
+{
+  "deepdive": {
+    "calibration": {
+      "holdout_fraction": 0.25
+    },
+    "db": {
+      "default": {
+        "dbname": "deepdive_movie_pranaab",
+        "driver": "org.postgresql.Driver",
+        "host": "localhost",
+        "incremental_mode": "ORIGINAL",
+        "password": "",
+        "port": "5432",
+        "url": "jdbc:postgresql://localhost:5432/deepdive_movie_pranaab",
+        "user": "pranaab"
+      }
+    },
+    "extraction": {
+      "extractors": {
+        "ext_review_feature_by_extract_features": {
+          "input": " SELECT R0.review_id AS \"reviews.R0.review_id\", R0.sentence AS \"reviews.R0.sentence\"\nFROM reviews R0\n        \n          ",
+          "input_batch_size": "100000",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "review_feature",
+          "parallelism": "1",
+          "style": "tsv_extractor",
+          "udf": "\"$DEEPDIVE_APP\"/udf/extract_features.py"
+        },
+        "ext_review_sentiment": {
+          "cmd": "\n\n\t# TODO use temporary table\n\tdeepdive create table \"review_sentiment\"\n\tdeepdive sql 'INSERT INTO review_sentiment SELECT DISTINCT R0.review_id, R1.sentiment, 0 AS id, \nCASE WHEN R1.sentiment = R0.sentiment THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0, sentiments R1\n        \n          '\n\t# TODO rename temporary table to replace output_relation\n\t\n        ",
+          "input_relations": [
+            "reviews",
+            "sentiments"
+          ],
+          "output_relation": "review_sentiment",
+          "style": "cmd_extractor"
+        }
+      }
+    },
+    "pipeline": {
+      "pipelines": {
+        "endtoend": [
+          "ext_review_sentiment",
+          "ext_review_feature_by_extract_features"
+        ],
+        "extraction": [
+          "ext_review_sentiment",
+          "ext_review_feature_by_extract_features"
+        ]
+      },
+      "run": ""
+    },
+    "sampler": {
+      "sampler_args": "-l 1000 -s 1 -i 1000 --alpha 0.01 --sample_evidence",
+      "sampler_cmd": "sampler-dw"
+    },
+    "schema": {
+      "relations": {
+        "review_feature": {
+          "columns": {
+            "feature": {
+              "index": 1,
+              "type": "text"
+            },
+            "id": {
+              "index": 0,
+              "type": "int"
+            }
+          }
+        },
+        "review_sentiment": {
+          "columns": {
+            "index": {
+              "index": 0,
+              "type": "int"
+            },
+            "sentiment_id": {
+              "index": 1,
+              "type": "int"
+            }
+          },
+          "variable_cardinality": 2,
+          "variable_type": "boolean"
+        },
+        "reviews": {
+          "columns": {
+            "review_id": {
+              "index": 0,
+              "type": "int"
+            },
+            "sentence": {
+              "index": 1,
+              "type": "text"
+            },
+            "sentiment": {
+              "index": 2,
+              "type": "int"
+            }
+          }
+        },
+        "sentiments": {
+          "columns": {
+            "index": {
+              "index": 1,
+              "type": "int"
+            },
+            "sentiment": {
+              "index": 0,
+              "type": "text"
+            }
+          }
+        }
+      },
+      "variables": {
+        "review_sentiment": {
+          "label": "Boolean"
+        }
+      }
+    }
+  },
+  "deepdive_": {
+    "calibration": {
+      "holdout_fraction": 0.25
+    },
+    "db": {
+      "default": {
+        "dbname": "deepdive_movie_pranaab",
+        "driver": "org.postgresql.Driver",
+        "host": "localhost",
+        "incremental_mode": "ORIGINAL",
+        "password": "",
+        "port": "5432",
+        "url": "jdbc:postgresql://localhost:5432/deepdive_movie_pranaab",
+        "user": "pranaab"
+      }
+    },
+    "extraction": {
+      "extractors": {
+        "ext_review_feature_by_extract_features": {
+          "input": " SELECT R0.review_id AS \"reviews.R0.review_id\", R0.sentence AS \"reviews.R0.sentence\"\nFROM reviews R0\n        \n          ",
+          "input_batch_size": "100000",
+          "input_relations": [
+            "reviews"
+          ],
+          "output_relation": "review_feature",
+          "parallelism": "1",
+          "style": "tsv_extractor",
+          "udf": "\"$DEEPDIVE_APP\"/udf/extract_features.py"
+        },
+        "ext_review_sentiment": {
+          "cmd": "\n\n\t# TODO use temporary table\n\tdeepdive create table \"review_sentiment\"\n\tdeepdive sql 'INSERT INTO review_sentiment SELECT DISTINCT R0.review_id, R1.sentiment, 0 AS id, \nCASE WHEN R1.sentiment = R0.sentiment THEN true\n     ELSE false\nEND AS label\n          FROM reviews R0, sentiments R1\n        \n          '\n\t# TODO rename temporary table to replace output_relation\n\t\n        ",
+          "input_relations": [
+            "reviews",
+            "sentiments"
+          ],
+          "output_relation": "review_sentiment",
+          "style": "cmd_extractor"
+        }
+      }
+    },
+    "pipeline": {
+      "pipelines": {
+        "endtoend": [
+          "ext_review_sentiment",
+          "ext_review_feature_by_extract_features"
+        ],
+        "extraction": [
+          "ext_review_sentiment",
+          "ext_review_feature_by_extract_features"
+        ]
+      },
+      "run": ""
+    },
+    "sampler": {
+      "sampler_args": "-l 1000 -s 1 -i 1000 --alpha 0.01 --sample_evidence",
+      "sampler_cmd": "sampler-dw"
+    },
+    "schema": {
+      "relations": {
+        "review_feature": {
+          "columns": {
+            "feature": {
+              "index": 1,
+              "type": "text"
+            },
+            "id": {
+              "index": 0,
+              "type": "int"
+            }
+          }
+        },
+        "review_sentiment": {
+          "columns": {
+            "index": {
+              "index": 0,
+              "type": "int"
+            },
+            "sentiment_id": {
+              "index": 1,
+              "type": "int"
+            }
+          },
+          "variable_cardinality": 2,
+          "variable_type": "boolean"
+        },
+        "reviews": {
+          "columns": {
+            "review_id": {
+              "index": 0,
+              "type": "int"
+            },
+            "sentence": {
+              "index": 1,
+              "type": "text"
+            },
+            "sentiment": {
+              "index": 2,
+              "type": "int"
+            }
+          }
+        },
+        "sentiments": {
+          "columns": {
+            "index": {
+              "index": 1,
+              "type": "int"
+            },
+            "sentiment": {
+              "index": 0,
+              "type": "text"
+            }
+          }
+        }
+      },
+      "variables": {
+        "review_sentiment": {
+          "label": "Boolean"
+        }
+      }
+    },
+    "inference": {
+      "factors": {}
+    },
+    "execution": {
+      "processes": {}
+    }
+  }
+}

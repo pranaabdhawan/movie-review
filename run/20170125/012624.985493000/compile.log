@@ -1,0 +1,12 @@
+2017-01-25 01:26:25.066507 ‘run/LATEST.COMPILE’ -> ‘20170125/012624.985493000’
+2017-01-25 01:26:25.066864 ‘run/RUNNING.COMPILE’ -> ‘20170125/012624.985493000’
+2017-01-25 01:26:25.066895 Parsing DeepDive application (/Users/pranaab/Developer/Term3A/URA/movie-review) to generate:
+2017-01-25 01:26:25.066912  run/compiled/schema.json
+2017-01-25 01:26:25.066929   from app.ddlog
+2017-01-25 01:26:25.890239  run/compiled/deepdive.conf
+2017-01-25 01:26:25.890338   from app.ddlog
+2017-01-25 01:26:26.402895 [error] "sentiments": number of columns in the query does not match number of columns in the schema
+2017-01-25 01:26:26.402953 review_sentiment(index, sentiment) = NULL * :-
+2017-01-25 01:26:26.402973     reviews(index, _, _),
+2017-01-25 01:26:26.402989     sentiments(sentiment).
+2017-01-25 01:26:26.403004 

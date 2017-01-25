@@ -1,0 +1,15 @@
+2017-01-25 01:27:32.723223 # on Pranaabs-MacBook-Pro.local: deepdive do review_sentiment
+2017-01-25 01:27:32.723526 # run/20170125/012730.378878000/plan.sh
+2017-01-25 01:27:32.723600 # execution plan for data/review_sentiment
+2017-01-25 01:27:32.723636 
+2017-01-25 01:27:32.723659 ## process/init/app ##########################################################
+2017-01-25 01:27:32.723682 # Done: N/A
+2017-01-25 01:27:32.723703 process/init/app/run.sh
+2017-01-25 01:27:32.723722 ++ dirname process/init/app/run.sh
+2017-01-25 01:27:32.723744 + cd process/init/app
+2017-01-25 01:27:32.723765 + export DEEPDIVE_CURRENT_PROCESS_NAME=process/init/app
+2017-01-25 01:27:32.723787 + DEEPDIVE_CURRENT_PROCESS_NAME=process/init/app
+2017-01-25 01:27:32.723810 + deepdive db init
+2017-01-25 01:27:40.547269 dropdb: database removal failed: ERROR:  database "deepdive_movie_pranaab" is being accessed by other users
+2017-01-25 01:27:40.547436 DETAIL:  There is 1 other session using the database.
+2017-01-25 01:27:40.572388 createdb: database creation failed: ERROR:  database "deepdive_movie_pranaab" already exists

@@ -4,6 +4,12 @@ reviews(
   sentiment int
 ).
 
+#All available sentiments
+sentiments(
+  sentiment text,
+  index int
+).
+
 review_feature(
   id int,
   feature text
@@ -20,63 +26,17 @@ review_feature += extract_features(
 ) :-
   reviews(index, sentence, _).
 
-is_negative(index) = if sentiment = 0 then TRUE
-                  else FALSE end:- reviews(index,_,sentiment).
-
-is_somewhat_negative(index) = if sentiment = 1 then TRUE
-                          else FALSE end:- reviews(index,_,sentiment).
-
-is_neutral(index) = if sentiment = 2 then TRUE
-                  else FALSE end:- reviews(index,_,sentiment).
-
-is_somewhat_positive(index) = if sentiment = 3 then TRUE
-                          else FALSE end:- reviews(index,_,sentiment).
-
-is_positive(index) = if sentiment = 4 then TRUE
-                  else FALSE end:- reviews(index,_,sentiment).
-
-is_negative?(
-  index int
+#Classify review sentiment as a set of Boolean variables
+review_sentiment?(
+  index int,
+  sentiment_id int
 ).
+
+review_sentiment(index, sentiment_id) = (if sentiment_id = true_sentiment_id then TRUE else FALSE end) :-
+  reviews( index, _, true_sentiment_id), sentiments(_, sentiment_id).
 
 
 @weight(f)
-is_negative(index) :-
+review_sentiment(index, sentiment_id):-
   reviews(index,_,_),
-  review_feature(index,f).
-
-is_somewhat_negative?(
-  index int
-).
-
-is_neutral?(
-  index int
-).
-
-is_somewhat_positive?(
-  index int
-).
-
-is_positive?(
-  index int
-).
-
-@weight(f)
-is_somewhat_negative(index) :-
-  reviews(index,_,_),
-  review_feature(index,f).
-
-@weight(f)
-is_neutral(index) :-
-  reviews(index,_,_),
-  review_feature(index,f).
-
-@weight(f)
-is_somewhat_positive(index) :-
-  reviews(index,_,_),
-  review_feature(index,f).
-
-@weight(f)
-is_positive(index) :-
-  reviews(index,_,_),
-  review_feature(index,f).
+  review_feature(index, f).
